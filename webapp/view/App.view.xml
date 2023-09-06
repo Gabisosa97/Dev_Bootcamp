@@ -1,7 +1,48 @@
-<mvc:View controllerName="project1.controller.App"
-    xmlns:html="http://www.w3.org/1999/xhtml"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <App id="app">
-    </App>
+<mvc:View
+	controllerName="project1.controller.App"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	<App id="app">
+		<Page title="Primer commit hecho en VSCode">
+			<Button
+				icon="sap-icon://sap-ui5"
+				text="Acceder"
+				press=".goForward"
+				type="Emphasized"
+				class="sapUiSmallMargin"/>
+		</Page>
+		<Page id="intro" title="Primer acercamiento a SAP BTP">
+			<l:BlockLayout background="Default">
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<Image src="https://logos-world.net/wp-content/uploads/2020/06/Accenture-Emblem.png" class="sapUiMediumMarginBottom" width="50%"/>
+						<Title level="H1" titleStyle="H1" text="This is UI5!" width="100%" textAlign="Center"/>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<FlexBox items="{/features}" justifyContent="Center" wrap="Wrap" class="sapUiSmallMarginBottom">
+							<tnt:InfoLabel text="{}" class="sapUiSmallMarginTop sapUiSmallMarginEnd"/>
+						</FlexBox>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<Panel headerText="Are you ready?" expandable="true">
+							<Switch change=".onChange" customTextOn="yes" customTextOff="no"/>
+							<l:HorizontalLayout id="ready" visible="false" class="sapUiSmallMargin">
+								<Text text="Ok, let's get you started!" class="sapUiTinyMarginEnd"/>
+								<Link text="Learn more" href="https://sdk.openui5.org/"/>
+							</l:HorizontalLayout>
+						</Panel>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+		</Page>
+	</App>
 </mvc:View>
