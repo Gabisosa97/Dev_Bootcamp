@@ -1,62 +1,233 @@
-<mvc:View controllerName="project1.controller.App" displayBlock="true"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:l="sap.ui.layout"
-	xmlns:core="sap.ui.core"
-	xmlns:tnt="sap.tnt">
-	<App id="app">
-		<Page id="welcome" title="Primer commit hecho en VSCode">
-			<Button icon="sap-icon://action" text="Acceder" press=".goForward" type="Emphasized" class="sapUiSmallMargin"/>
-		</Page>
-		<Page id="intro" title="Primer acercamiento a SAP BTP">
-			<Button icon="sap-icon://undo" text="Volver" press=".goBack" type="Emphasized" class="sapUiSmallMargin"/>
-			<l:BlockLayout background="Mixed">
-				<l:BlockLayoutRow>
-					<l:BlockLayoutCell>
-						<Text text="Contador"></Text>
-						<FlexBox>
-							<items>
-								<Button icon="sap-icon://up" text="Increment" press=".inc(1)" type="Emphasized" class="sapUiSmallMargin"/>
-								<Input liveChange=".suma" id="inputO" class="sapUiSmallMarginTopBottom" />
-								<Select id="sel" change=".op" items="{/operations}">
-									<core:Item key="{}" text="{}" />
-								</Select>
-								<Input liveChange=".suma" id="input1" class="sapUiSmallMarginTopBottom" />
+<mvc:View
+    controllerName="project1.controller.App"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:tnt="sap.tnt"
+>
+    <App id="app">
+        <Page
+            id="welcome"
+            title="Primer commit hecho en VSCode"
+        >
+            <Button
+                icon="sap-icon://action"
+                text="Calculadora"
+                press=".goForward"
+                type="Emphasized"
+                class="sapUiSmallMargin"
+            />
+            <l:BlockLayout background="Mixed">
+                <l:BlockLayoutRow>
+                    <l:BlockLayoutCell>
+                        <Image
+                            src="https://logos-world.net/wp-content/uploads/2020/06/Accenture-Emblem.png"
+                            class="sapUiMediumMarginBottom"
+                            width="50%"
+                        />
+                        <Title
+                            level="H1"
+                            titleStyle="H1"
+                            text="This is UI5!"
+                            width="100%"
+                            textAlign="Center"
+                        />
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
 
-								<Input id="input2" class="sapUiSmallMarginTopBottom" />
-								<Button icon="sap-icon://down" text="Decrement" press=".inc(-1)" type="Emphasized" class="sapUiSmallMargin"/>
-							</items>
-						</FlexBox>
-					</l:BlockLayoutCell>
-				</l:BlockLayoutRow>
-			</l:BlockLayout>
-			<l:BlockLayout background="Mixed">
-				<l:BlockLayoutRow>
-					<l:BlockLayoutCell>
-						<Image src="https://logos-world.net/wp-content/uploads/2020/06/Accenture-Emblem.png" class="sapUiMediumMarginBottom" width="50%"/>
-						<Title level="H1" titleStyle="H1" text="This is UI5!" width="100%" textAlign="Center"/>
-					</l:BlockLayoutCell>
-				</l:BlockLayoutRow>
-				<l:BlockLayoutRow>
-					<l:BlockLayoutCell>
-						<FlexBox items="{/features}" justifyContent="Center" wrap="Wrap" class="sapUiSmallMarginBottom">
-							<tnt:InfoLabel text="{}" class="sapUiSmallMarginTop sapUiSmallMarginEnd"/>
-						</FlexBox>
-					</l:BlockLayoutCell>
-				</l:BlockLayoutRow>
+                <l:BlockLayoutRow>
+                    <l:BlockLayoutCell>
+                        <Panel
+                            headerText="Are you ready?"
+                            expandable="true"
+                        >
+                            <Switch
+                                change=".onChange"
+                                customTextOn="yes"
+                                customTextOff="no"
+                            />
+                            <l:HorizontalLayout
+                                id="ready"
+                                visible="false"
+                                class="sapUiSmallMargin"
+                            >
+                                <Text
+                                    text="Ok, let's get you started!"
+                                    class="sapUiTinyMarginEnd"
+                                />
+                                <Link
+                                    text="Learn more"
+                                    href="https://sdk.openui5.org/"
+                                />
+                            </l:HorizontalLayout>
+                        </Panel>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </Page>
+        <Page
+            id="calculadora"
+            title="Primer acercamiento a SAP BTP"
+        >
+            <Button
+                icon="sap-icon://undo"
+                text="Volver"
+                press=".goBack"
+                type="Emphasized"
+                class="sapUiSmallMargin"
+            />
+            <l:BlockLayout background="Mixed">
+                <l:BlockLayoutRow>
+                    <l:BlockLayoutCell>
+                        <Text text="Calculadora" />
+                        <core:Icon
+                            src="sap-icon://phone"
+                            size="150%"
+                        />
 
-				<l:BlockLayoutRow>
-					<l:BlockLayoutCell>
-						<Panel headerText="Are you ready?" expandable="true">
-							<Switch change=".onChange" customTextOn="yes" customTextOff="no"/>
-							<l:HorizontalLayout id="ready" visible="false" class="sapUiSmallMargin">
-								<Text text="Ok, let's get you started!" class="sapUiTinyMarginEnd"/>
-								<Link text="Learn more" href="https://sdk.openui5.org/"/>
-							</l:HorizontalLayout>
-						</Panel>
-					</l:BlockLayoutCell>
-				</l:BlockLayoutRow>
-			</l:BlockLayout>
-		</Page>
-	</App>
+                        <VBox
+                            alignItems="Center"
+                            id="selectLayout"
+                        >
+                            <items>
+                                <l:HorizontalLayout>
+                                    <l:VerticalLayout>
+                                        <Label
+                                            text="Numero 1"
+                                            labelFor="input1"
+                                        />
+                                        <Input
+                                            type="Number"
+                                            liveChange=".op"
+                                            id="inputO"
+                                            class="sapUiSmallMarginTopBottom"
+                                        />
+                                    </l:VerticalLayout>
+
+                                    <VBox>
+                                        <Label
+                                            text="Operador"
+                                            labelFor="input1"
+                                        />
+                                        <Select
+                                            id="sel"
+                                            change=".op"
+                                            items="{/operations}"
+                                        >
+                                            <core:Item
+                                                key="{}"
+                                                text="{}"
+                                            />
+                                        </Select>
+                                    </VBox>
+
+                                    <l:VerticalLayout>
+                                        <Label
+                                            text="Numero 2"
+                                            labelFor="input1"
+                                        />
+                                        <Input
+                                            valueStateText="No puede ser 0"
+                                            type="Number"
+                                            liveChange=".op"
+                                            id="input1"
+                                            class="sapUiSmallMarginTopBottom"
+                                        />
+                                    </l:VerticalLayout>
+                                    <l:VerticalLayout>
+                                        <Label
+                                            text="Resultado"
+                                            labelFor="input1"
+                                        />
+                                        <Input
+                                            enabled="false"
+                                            type="Number"
+                                            id="input2"
+                                            class="sapUiSmallMarginTopBottom"
+                                        />
+                                    </l:VerticalLayout>
+                                    <VBox>
+                                        <Button
+                                            icon="sap-icon://up"
+                                            text="Increment"
+                                            press=".inc(1)"
+                                            type="Emphasized"
+                                            class="sapUiSmallMarginBeginEnd"
+                                        />
+                                        <Button
+                                            icon="sap-icon://down"
+                                            text="Decrement"
+                                            press=".inc(-1)"
+                                            type="Emphasized"
+                                            class="sapUiSmallMarginBeginEnd"
+                                        />
+                                    </VBox>
+                                </l:HorizontalLayout>
+                            </items>
+                        </VBox>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+            <l:BlockLayout background="Mixed">
+                <l:BlockLayoutRow>
+                    <l:BlockLayoutCell>
+                        <Text text="Steamcito" />
+                        <core:Icon
+                            src="sap-icon://business-one"
+                            size="150%"
+                        />
+                        <VBox
+                            alignItems="Center"
+                            id="selectLayout1"
+                        >
+                            <items>
+                                <l:HorizontalLayout>
+                                    <l:VerticalLayout>
+                                        <Label
+                                            text="Precio Steam"
+                                            labelFor="input1"
+                                        />
+                                        <Input
+                                            type="Number"
+                                            liveChange=".conv"
+                                            id="pesos"
+                                            class="sapUiSmallMarginTopBottom"
+                                        />
+                                    </l:VerticalLayout>
+
+                                    <l:VerticalLayout>
+                                        <Label
+                                            text="Impuestos(75%)"
+                                            labelFor="input1"
+                                        />
+                                        <Input
+                                            enabled="false"
+                                            type="Number"
+                                            liveChange=".conv"
+                                            id="impuestos"
+                                            class="sapUiSmallMarginTopBottom"
+                                        />
+                                    </l:VerticalLayout>
+                                    <l:VerticalLayout>
+                                        <Label
+                                            text="Precio Real"
+                                            labelFor="input1"
+                                        />
+                                        <Input
+                                            enabled="false"
+                                            type="Number"
+                                            id="resultado"
+                                            class="sapUiSmallMarginTopBottom"
+                                        />
+                                    </l:VerticalLayout>
+                                </l:HorizontalLayout>
+                            </items>
+                        </VBox>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </Page>
+    </App>
 </mvc:View>
