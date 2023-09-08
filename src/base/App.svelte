@@ -4,11 +4,21 @@
 
 	let shellBarTitle = 'UI5 + Svelte';
 	let user = { name: 'Gabriel Sosa', role: 'Admin' };
+	let menu: any = [
+		{
+			name: 'Todo',
+			route: '/Todo/Todo',
+		},
+		{
+			name: 'Chau',
+			route: '/Chau/Chau',
+		},
+	];
 </script>
 
 <div class="main">
-	<Menu {user} {shellBarTitle} />
-	<Routes />
+	<Menu {user} {shellBarTitle} {menu}/>
+	<!-- <Routes /> -->
 </div>
 
 <style>
