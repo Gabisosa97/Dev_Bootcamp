@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { push, replace, pop } from 'svelte-spa-router';
+	import { push, pop } from 'svelte-spa-router';
 	import Routes from '../routes.svelte';
 
 	// UI5  Components
@@ -38,6 +38,7 @@
 	import '@ui5/webcomponents-icons/dist/activities.js';
 	import '@ui5/webcomponents-icons/dist/background.js';
 	import '@ui5/webcomponents-icons/dist/course-book.js';
+	import '@ui5/webcomponents-icons/dist/cloud.js';
 	import logo from './assets/imgs/Accenture-Emblem.png';
 
 	setTheme('sap_fiori_3_dark');

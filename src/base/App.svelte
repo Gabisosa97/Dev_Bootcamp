@@ -23,6 +23,12 @@
 			icon: 'course-book',
 			sub: [{ name: 'Fotos', route: '/Fotos/Fotos', icon: 'background' }],
 		},
+		{
+			name: 'ODATA',
+			route: '/Odata/Odata',
+			icon: 'cloud',
+			sub: [],
+		},
 	];
 </script>
 
