@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { push } from 'svelte-spa-router';
+	import Routes from '../routes.svelte';
 
 	// UI5  Components
 	import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme';
@@ -21,6 +22,8 @@
 	import '@ui5/webcomponents-fiori/dist/ShellBarItem';
 	import '@ui5/webcomponents-fiori/dist/Assets.js';
 	import '@ui5/webcomponents/dist/Switch';
+
+	// Icons
 	import '@ui5/webcomponents-icons/dist/palette.js';
 	import '@ui5/webcomponents-icons/dist/menu.js';
 	import '@ui5/webcomponents-icons/dist/activate.js';
@@ -31,8 +34,10 @@
 	import '@ui5/webcomponents-icons/dist/private.js';
 	import '@ui5/webcomponents-icons/dist/loan.js';
 	import '@ui5/webcomponents-icons/dist/globe.js';
+	import '@ui5/webcomponents-icons/dist/activities.js';
+	import '@ui5/webcomponents-icons/dist/background.js';
+	import '@ui5/webcomponents-icons/dist/course-book.js';
 	import logo from './assets/imgs/Accenture-Emblem.png';
-	import Routes from '../routes.svelte';
 
 	setTheme('sap_fiori_3_dark');
 
@@ -40,7 +45,11 @@
 
 	export let shellBarTitle: string = '';
 	export let user: any;
-	$: collapsed: any = !collapsed ?? true;
+
+	let collapsed: boolean = true;
+	$: toggle = () => {
+		collapsed = !collapsed;
+	};
 
 	// Elements
 	let themeSettingsPopover;
@@ -105,7 +114,7 @@
 	<div class="tool-layout">
 		<ui5-shellbar primary-title={shellBarTitle} show-notifications notifications-count="2" on:profile-click={handleProfileClick}>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<ui5-button icon="menu" slot="startButton" on:click={() => (collapsed = !collapsed)} />
+			<ui5-button icon="menu" slot="startButton" on:click={toggle} />
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- <ui5-shellbar-item icon="menu" text="Menu" on:click={handleMenuToggle} /> -->
 			<img class="app-header-logo" slot="logo" src={logo} alt="ui5 orange pheonix logo" />
@@ -115,10 +124,10 @@
 		</ui5-shellbar>
 
 		<!-- *SIDE-NAVIGATION -->
-		<ui5-side-navigation collapsed>
+		<ui5-side-navigation {collapsed}>
 			{#each menu as m}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<ui5-side-navigation-item text={m.name} icon="home" on:click={e => push(m.route)} />
+				<ui5-side-navigation-item text={m.name} icon={m.icon} on:click={e => push(m.route)} />
 			{/each}
 		</ui5-side-navigation>
 
@@ -228,6 +237,7 @@
 		padding: 0;
 		margin: 0;
 		height: 100%;
+		width: 100%;
 		background-color: var(--sapBackgroundColor);
 	}
 
@@ -343,6 +353,7 @@
 	}
 	ui5-side-navigation {
 		border-radius: 0.5rem 0.5rem 0 0.5rem;
+		height: 50rem;
 	}
 	.content {
 		background: var(--sapBackgroundColor);

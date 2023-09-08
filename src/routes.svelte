@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Todo from '@/Todo/main.svelte';
-	import Hola from '@/Hola/main.svelte';
-	import Chau from '@/Chau/main.svelte';
-</script>
+	import Fotos from '@/Fotos/main.svelte';
+import Cards from '@/Cards/main.svelte';
+</script><Cards prefix='/Cards' />
 
-<Chau prefix="/Chau" />
 
-<Hola prefix="/Hola" />
+<Fotos prefix="/Fotos" />
 
 <Todo prefix="/Todo" />

@@ -6,12 +6,19 @@
 	let user = { name: 'Gabriel Sosa', role: 'Admin' };
 	let menu: any = [
 		{
-			name: 'Todo',
+			name: 'Tareas',
 			route: '/Todo/Todo',
+			icon: 'activities'
 		},
 		{
-			name: 'Chau',
-			route: '/Chau/Chau',
+			name: 'Fotos',
+			route: '/Fotos/Fotos',
+			icon: 'background'
+		},
+		{
+			name: 'Cards',
+			route: '/Cards/Cards',
+			icon: 'course-book'
 		},
 	];
 </script>
