@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { menuAccion, menuStore } from './store';
 	import { push } from 'svelte-spa-router';
 	// UI5  Components
 	import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme';
@@ -15,11 +14,15 @@
 	import '@ui5/webcomponents/dist/Popover';
 	import '@ui5/webcomponents/dist/Tab';
 	import '@ui5/webcomponents/dist/TabContainer';
+	import '@ui5/webcomponents-fiori/dist/SideNavigation';
+	import '@ui5/webcomponents-fiori/dist/SideNavigationItem';
 	import '@ui5/webcomponents-fiori/dist/ShellBar';
 	import '@ui5/webcomponents-fiori/dist/ShellBarItem';
 	import '@ui5/webcomponents-fiori/dist/Assets.js';
 	import '@ui5/webcomponents/dist/Switch';
 	import '@ui5/webcomponents-icons/dist/palette.js';
+	import '@ui5/webcomponents-icons/dist/menu.js';
+	import '@ui5/webcomponents-icons/dist/activate.js';
 	import '@ui5/webcomponents-icons/dist/settings.js';
 	import '@ui5/webcomponents-icons/dist/sys-help.js';
 	import '@ui5/webcomponents-icons/dist/log.js';
@@ -27,7 +30,7 @@
 	import '@ui5/webcomponents-icons/dist/private.js';
 	import '@ui5/webcomponents-icons/dist/loan.js';
 	import '@ui5/webcomponents-icons/dist/globe.js';
-	import logo from './assets/imgs/UI5-orange-pheonix-logo.png';
+	import logo from './assets/imgs/Accenture-Emblem.png';
 
 	setTheme('sap_fiori_3_dark');
 
@@ -42,24 +45,24 @@
 		},
 	];
 
-	menuStore.subscribe((data: any) => (open = data.open));
-
-	function setActive(value: string) {
-		push(value);
-		menuAccion.open();
-	}
-
 	export let shellBarTitle: string = '';
 	export let user: any;
 
 	// Elements
-	let dialog;
-	let dialogTextArea;
-	let dialogDatePicker;
 	let themeSettingsPopover;
+	let menuPopover;
 	let profileSettingsPopover;
 
 	// Event Handlers
+	const handleMenuToggle = event => {
+		menuPopover.showAt(event.detail.targetRef);
+	};
+
+	const handleMenuChange = event => {
+		push(event.detail.selectedItems[0].getAttribute('data-key'));
+		menuPopover.close();
+	};
+
 	const handleThemeSettingsToggle = event => {
 		themeSettingsPopover.showAt(event.detail.targetRef);
 	};
@@ -102,32 +105,23 @@
 	const handleHelpDialogCloseButtonClick = event => {
 		window['help-dialog'].close();
 	};
-
-	const handleItemInput = event => {
-		itemInputValue = event.target.value;
-	};
-
-	const handleDateInput = event => {
-		itemDateInputValue = event.detail.value;
-	};
 </script>
 
 <main class="app">
 	<header class="app-header">
 		<ui5-shellbar primary-title={shellBarTitle} show-notifications notifications-count="2" on:profile-click={handleProfileClick}>
+			<ui5-shellbar-item icon="menu" text="Menu" on:click={handleMenuToggle} />
 			<img class="app-header-logo" slot="logo" src={logo} alt="ui5 orange pheonix logo" />
 			<ui5-shellbar-item icon="palette" text="Theme" on:click={handleThemeSettingsToggle} />
 			<ui5-avatar slot="profile" size="XS" initials={user.name.split(' ')[0][0] + user.name.split(' ')[1][0]} />
 		</ui5-shellbar>
 	</header>
 
-	<ui5-tabcontainer >
+	<!-- <ui5-tabcontainer>
 		{#each menu as m}
-			<ui5-tab text={m.name} on:TabChange={console.log("gkasdf")}>
-				<!-- <a href={m.route}>asfsadfsd</a> -->
-			</ui5-tab>
+			<ui5-tab text={m.name} on:dblclick={console.log("gdfg")}/>
 		{/each}
-	</ui5-tabcontainer>
+	</ui5-tabcontainer> -->
 
 	<ui5-popover bind:this={themeSettingsPopover} class="app-bar-theming-popover" placement-type="Bottom" horizontal-align="Right" header-text="Theme">
 		<ui5-list mode="SingleSelect" on:selection-change={handleThemeChange}>
@@ -139,6 +133,14 @@
 			<ui5-li icon="palette" data-theme="sap_fiori_3_dark">SAP Quartz Dark</ui5-li>
 			<ui5-li icon="palette" data-theme="sap_fiori_3_hcb">SAP Quartz HCB</ui5-li>
 			<ui5-li icon="palette" data-theme="sap_fiori_3_hcw">SAP Quartz HCW</ui5-li>
+		</ui5-list>
+	</ui5-popover>
+
+	<ui5-popover bind:this={menuPopover} class="app-bar-theming-popover" placement-type="Bottom" horizontal-align="Left" header-text="Menu">
+		<ui5-list mode="SingleSelect" on:selection-change={handleMenuChange}>
+			{#each menu as m}
+				<ui5-li icon="activate" data-key={m.route}>{m.name}</ui5-li>
+			{/each}
 		</ui5-list>
 	</ui5-popover>
 

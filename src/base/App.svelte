@@ -14,5 +14,6 @@
 <style>
 	.main {
 		margin: auto;
+		color: aliceblue;
 	}
 </style>
