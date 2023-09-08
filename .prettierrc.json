@@ -1,13 +1,20 @@
 {
-  "singleQuote": false,
+  "singleQuote": true,
+  "trailingComma": "all",
   "printWidth": 200,
+  "proseWrap": "always",
   "endOfLine": "lf",
+  "bracketSpacing": true,
   "tabWidth": 4,
+  "semi": true,
   "useTabs": true,
+  "arrowParens": "avoid",
+  "svelteSortOrder": "scripts-markup-styles",
   "overrides": [
     {
       "files": ["*.yaml", "*.yml", "*.md", "*.json", "*.xml", "*.properties"],
       "options": {
+        "parser":"json",
         "useTabs": false,
         "tabWidth": 2,
         "keySeparator": "=",
