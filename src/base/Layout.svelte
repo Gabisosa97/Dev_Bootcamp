@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { push } from 'svelte-spa-router';
+	import { push, replace, pop } from 'svelte-spa-router';
 	import Routes from '../routes.svelte';
 
 	// UI5  Components
@@ -18,6 +18,7 @@
 	import '@ui5/webcomponents/dist/TabContainer';
 	import '@ui5/webcomponents-fiori/dist/SideNavigation';
 	import '@ui5/webcomponents-fiori/dist/SideNavigationItem';
+	import '@ui5/webcomponents-fiori/dist/SideNavigationSubItem';
 	import '@ui5/webcomponents-fiori/dist/ShellBar';
 	import '@ui5/webcomponents-fiori/dist/ShellBarItem';
 	import '@ui5/webcomponents-fiori/dist/Assets.js';
@@ -52,9 +53,9 @@
 	};
 
 	// Elements
-	let themeSettingsPopover;
-	let menuPopover;
-	let profileSettingsPopover;
+	let themeSettingsPopover: any;
+	let menuPopover: any;
+	let profileSettingsPopover: any;
 
 	// Event Handlers
 	const handleMenuToggle = event => {
@@ -112,6 +113,7 @@
 
 <main class="app">
 	<div class="tool-layout">
+		<!-- * NAVIGATION-BAR -->
 		<ui5-shellbar primary-title={shellBarTitle} show-notifications notifications-count="2" on:profile-click={handleProfileClick}>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<ui5-button icon="menu" slot="startButton" on:click={toggle} />
@@ -123,11 +125,21 @@
 			<ui5-avatar slot="profile" size="XS" initials={user.name.split(' ')[0][0] + user.name.split(' ')[1][0]} />
 		</ui5-shellbar>
 
-		<!-- *SIDE-NAVIGATION -->
+		<!-- * SIDE-NAVIGATION -->
 		<ui5-side-navigation {collapsed}>
 			{#each menu as m}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<ui5-side-navigation-item text={m.name} icon={m.icon} on:click={e => push(m.route)} />
+				<ui5-side-navigation-item text={m.name} icon={m.icon} on:click={e => push(m.route)}>
+					{#each m.sub as s}
+						<ui5-side-navigation-sub-item
+							text={s.name}
+							on:click={e => {
+								pop();
+								push(s.route);
+							}}
+						/>
+					{/each}
+				</ui5-side-navigation-item>
 			{/each}
 		</ui5-side-navigation>
 

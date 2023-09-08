@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Routes from '../routes.svelte';
-	import Menu from './Menu.svelte';
+	import Layout from './Layout.svelte';
 
 	let shellBarTitle = 'UI5 + Svelte';
 	let user = { name: 'Gabriel Sosa', role: 'Admin' };
@@ -8,24 +8,26 @@
 		{
 			name: 'Tareas',
 			route: '/Todo/Todo',
-			icon: 'activities'
+			icon: 'activities',
+			sub: [],
 		},
 		{
 			name: 'Fotos',
 			route: '/Fotos/Fotos',
-			icon: 'background'
+			icon: 'background',
+			sub: [],
 		},
 		{
 			name: 'Cards',
 			route: '/Cards/Cards',
-			icon: 'course-book'
+			icon: 'course-book',
+			sub: [{ name: 'Fotos', route: '/Fotos/Fotos', icon: 'background' }],
 		},
 	];
 </script>
 
 <div class="main">
-	<Menu {user} {shellBarTitle} {menu}/>
-	<!-- <Routes /> -->
+	<Layout {user} {shellBarTitle} {menu} />
 </div>
 
 <style>
